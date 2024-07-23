@@ -1,0 +1,35 @@
+*******************************************************************DATABASES******************************************************************
+
+payment_history: ref_no(pk), to_id, from_id, amount, time, payer_bank, 
+
+users: user_id, first_name, last_name, age, mobile, current_bank_id, username, password, pin
+
+banks: bank_id, name, branch
+
+balance: user_id(pk), bank_id(pk), amount; user_id and bank_id togather make a composite key
+
+******************************************************************MISC IDEAS******************************************************************
+bill reminders
+paytm messages on payments
+
+*******************************************************************FEATURES*******************************************************************
+1) paying option;
+2) check balance
+3) transaction history
+    -- view recevied
+    -- view sent
+    -- view all
+4) search payment 
+    -- search by type
+    -- search by min amount
+    -- search by date
+5) Change settings
+    -- change username
+    -- switch banks
+6) sign out
+
+**************************************************************HOW DS WILL BE USED**************************************************************
+
+1) when search payments or transaction history is opened all the payments are stored locally in an arraylist
+ and then according to the user input manipulated locally
+    strucs used: arraylist
