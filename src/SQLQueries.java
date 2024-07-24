@@ -119,5 +119,72 @@ public class SQLQueries {
             Misc.cls();
             System.out.println("Account not created :(");
         }
-    };
+    }
+
+    public int getUserID(String username) throws SQLException {
+        String sql = "Select user_id from users where username=?";
+        PreparedStatement pst = con.prepareStatement(sql);
+        pst.setString(1, username);
+        ResultSet rs = pst.executeQuery();
+        int id = -1;
+        if (rs.next()) {
+            id = rs.getInt(1);
+        }
+        return id;
+
+    }
+
+    public double checkBalance(int id) throws SQLException {
+        String sql = "select amount from balance where user_id=?";
+        PreparedStatement pst = con.prepareStatement(sql);
+        pst.setInt(1, id);
+        ResultSet rs = pst.executeQuery();
+        rs.next();
+        return rs.getDouble(1);
+    }
+
+    public void payAmount(String user, double amount, int id) throws SQLException {
+        String sql = "select amount from balance where user_id=?";
+        int payee_id = getUserID(user);
+        if (payee_id == -1) {
+            System.out.println("Username does not exist!!");
+            return;
+        }
+        if (amount < 0) {
+            System.out.println("Amount cant be negative!! Nice try :)");
+            return;
+        }
+
+        PreparedStatement pst = con.prepareStatement(sql);
+        pst.setInt(1, id);
+        ResultSet rs = pst.executeQuery();
+        rs.next();
+        double curr_balance = rs.getDouble(1);
+        if (curr_balance < amount) {
+            System.out.println("Insufficient Balance($" + curr_balance + ")!!!");
+            return;
+        } else {
+            double new_bal = curr_balance - amount;
+            String add = "update balance set amount=? where user_id=?";
+            String sub = "update balance set amount=amount+? where user_id=?";
+
+            pst = con.prepareStatement(add);
+            pst.setDouble(1, new_bal);
+            pst.setInt(2, id);
+            pst.execute();
+
+            pst = con.prepareStatement(sub);
+            pst.setDouble(1, amount);
+            pst.setInt(2, payee_id);
+            pst.execute();
+            System.out.println("Payment successfull!!!!");
+
+            String hist = "INSERT INTO payment_history(to_id, from_id, amount) VALUES(?,?,?)";
+            pst = con.prepareStatement(hist);
+            pst.setInt(1, payee_id);
+            pst.setInt(2, id);
+            pst.setDouble(3, amount);
+            pst.execute();
+        }
+    }
 }

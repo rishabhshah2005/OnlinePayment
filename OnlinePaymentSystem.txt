@@ -1,12 +1,12 @@
 *******************************************************************DATABASES******************************************************************
 
-payment_history: ref_no(pk), to_id, from_id, amount, time, payer_bank, 
+payment_history: ref_no(pk), to_id, from_id, amount, time, type,
 
-users: user_id, first_name, last_name, age, mobile, current_bank_id, username, password, pin
+users: user_id, first_name, last_name, age, mobile, current_bank_id, username, password, pin, buissness_type
 
 banks: bank_id, name, branch
 
-balance: user_id(pk), bank_id(pk), amount; user_id and bank_id togather make a composite key
+balance: user_id(pk), bank_id, amount;
 
 ******************************************************************MISC IDEAS******************************************************************
 bill reminders
@@ -25,7 +25,9 @@ paytm messages on payments
     -- search by date
 5) Change settings
     -- change username
+    -- add buisness type
     -- switch banks
+    -- delete account
 6) sign out
 
 **************************************************************HOW DS WILL BE USED**************************************************************

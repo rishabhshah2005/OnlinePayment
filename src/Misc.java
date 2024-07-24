@@ -1,3 +1,5 @@
+import java.sql.Timestamp;
+
 class Misc {
     public static void cls() {
         try {
@@ -16,4 +18,38 @@ class Misc {
                 "    \\  /\\  /    | |____  | |____  | |____  | |__| | | |  | | | |____ \r\n" + //
                 "     \\/  \\/     |______| |______|  \\_____|  \\____/  |_|  |_| |______|");
     }
+}
+
+class Transaction{
+    int ref_no, to_id, from_id;
+    double amount;
+    String type;
+    Timestamp time;
+    public int getRef_no() {
+        return ref_no;
+    }
+    public int getTo_id() {
+        return to_id;
+    }
+    public int getFrom_id() {
+        return from_id;
+    }
+    public double getAmount() {
+        return amount;
+    }
+    public String getType() {
+        return type;
+    }
+    public Timestamp getTime() {
+        return time;
+    }
+    public Transaction(int ref_no, int to_id, int from_id, double amount, String type, Timestamp time) {
+        this.ref_no = ref_no;
+        this.to_id = to_id;
+        this.from_id = from_id;
+        this.amount = amount;
+        this.type = type;
+        this.time = time;
+    }
+    
 }

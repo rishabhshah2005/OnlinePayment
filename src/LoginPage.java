@@ -10,24 +10,24 @@ public class LoginPage {
             throws IOException, InterruptedException, SQLException, ClassNotFoundException {
         Misc.welcome();
 
-        Scanner inp = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         SQLQueries quer = new SQLQueries();
         Console cons = System.console();
         int currentUserID = -1;
 
-        int index = 0;
-        while (index != 3) {
+        int ind = 0;
+        while (ind != 3) {
             System.out.println("1) Login");
             System.out.println("2) SignUp");
             System.out.println("3) Exit");
 
             System.out.print("Enter your choice: ");
-            index = inp.nextInt();
-            switch (index) {
+            ind = sc.nextInt();
+            switch (ind) {
                 case 1:
                     System.out.print("Enter username: ");
-                    inp.nextLine();
-                    String user = inp.nextLine();
+                    sc.nextLine();
+                    String user = sc.nextLine();
                     System.out.print("Enter password: ");
                     char[] p = cons.readPassword();
                     String pass = new String(p);
@@ -37,21 +37,26 @@ public class LoginPage {
                         Misc.cls();
                         currentUserID = id;
                         System.out.println("Login Successfull!!");
+                        Home h = new Home(id, sc);
+                        h.main();
                     } else {
                         Misc.cls();
                         System.out.println("Wrong username or password!!");
                     }
                     break;
                 case 2:
-                    inp.nextLine();
-                    quer.insertNewUser(inp);
+                    sc.nextLine();
+                    quer.insertNewUser(sc);
+                    break;
+                case 3:
+                    quer.con.close();
                     break;
 
                 default:
                     break;
             }
         }
-        inp.close();
+        sc.close();
 
     }
 }
