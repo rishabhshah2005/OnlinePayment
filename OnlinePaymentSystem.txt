@@ -33,3 +33,7 @@ paytm messages on payments
 1) when search payments or transaction history is opened all the payments are stored locally in an arraylist
  and then according to the user input manipulated locally
     strucs used: arraylist
+
+**************************************************************LOGIN PAGE**************************************************************
+1) login 
+2) sign up
