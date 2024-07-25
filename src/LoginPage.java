@@ -1,5 +1,6 @@
 import java.io.Console;
 import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.sql.*;
 
@@ -22,7 +23,11 @@ public class LoginPage {
             System.out.println("3) Exit");
 
             System.out.print("Enter your choice: ");
-            ind = sc.nextInt();
+            try {
+                ind = sc.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Input type not supported!!");
+            }
             switch (ind) {
                 case 1:
                     System.out.print("Enter username: ");
@@ -43,18 +48,22 @@ public class LoginPage {
                         Misc.cls();
                         System.out.println("Wrong username or password!!");
                     }
+                    ind = 0;
                     break;
                 case 2:
                     sc.nextLine();
                     quer.insertNewUser(sc);
+                    ind = 0;
                     break;
                 case 3:
                     quer.con.close();
                     break;
 
                 default:
+                    System.out.println("Enter correct index");
                     break;
             }
+
         }
         sc.close();
 

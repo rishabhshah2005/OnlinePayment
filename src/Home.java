@@ -21,20 +21,31 @@ class Home {
         System.out.println("6) Sign Out");
     }
 
-    void main() throws SQLException {
+    void main() throws SQLException, ClassNotFoundException {
         int index = 0;
         while (index != 6) {
             printMenu();
-            System.out.print("Enter index: ");
-            index = inp.nextInt();
+            try {
+                System.out.print("Enter index: ");
+                index = inp.nextInt();
+            } catch (Exception e) {
+                System.out.println("Input type not supported!!");
+            }
             inp.nextLine();
             switch (index) {
                 case 1:
                     Misc.cls();
                     pay();
+                    index = 0;
                     break;
                 case 2:
                     checkBalance();
+                    index = 0;
+                    break;
+                case 3:
+                    Transactions tr = new Transactions(id);
+                    tr.main(inp);
+                    index = 0;
                     break;
                 case 6:
                     quer.con.close();
@@ -42,6 +53,7 @@ class Home {
                 default:
                     break;
             }
+            
         }
     }
 

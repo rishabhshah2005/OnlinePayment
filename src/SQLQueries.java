@@ -1,4 +1,5 @@
 import java.sql.*;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class SQLQueries {
@@ -36,8 +37,14 @@ public class SQLQueries {
             System.out.println(rs.getInt(1) + ") " + rs.getString(2) + " " + rs.getString(3));
             lastId = rs.getInt(1);
         }
+        int id = -1;
         System.out.print("Enter bank id from the above options: ");
-        int id = inp.nextInt();
+        try {
+            id = inp.nextInt();
+        } catch (Exception e) {
+            System.out.println("INPUT NOT SUPPORTED");
+            return getBranchID(inp);
+        }
         if (id > lastId || id < 1) {
             Misc.cls();
             System.out.println("Enter Correct ID");
@@ -46,6 +53,30 @@ public class SQLQueries {
             return id;
         }
 
+    }
+
+    private int takeAge(Scanner inp) {
+        int age = -1;
+        try {
+            System.out.print("Enter age: ");
+            inp.nextLine();
+            age = inp.nextInt();
+        } catch (Exception e) {
+            System.out.println("Input not supported!!");
+            return takeAge(inp);
+        }
+        while (age < 18) {
+            if (age < 0) {
+                System.out.println("Negative age is not allowed");
+                System.out.print("Enter age: ");
+                age = inp.nextInt();
+                continue;
+            }
+            System.out.println("You must be at least 18 to open a account!!");
+            System.out.print("Enter age: ");
+            age = inp.nextInt();
+        }
+        return age;
     }
 
     void insertNewUser(Scanner inp) throws SQLException {
@@ -66,16 +97,7 @@ public class SQLQueries {
             last = inp.nextLine();
         }
 
-        System.out.print("Enter age: ");
-        int age = inp.nextInt();
-        while (age < 18) {
-            System.out.println("You must be at least 18 to open a account!!");
-            System.out.print("Enter age: ");
-            age = inp.nextInt();
-        }
-
         System.out.print("Enter mobile number: ");
-        inp.nextLine();
         String mobile = inp.nextLine();
         while (mobile.length() != 10) {
             System.out.println("Mobile number has to be of 10 digits");
@@ -84,6 +106,7 @@ public class SQLQueries {
         }
 
         int id = getBranchID(inp);
+        int age = takeAge(inp);
 
         inp.nextLine();
         System.out.print("Create username: ");
@@ -134,6 +157,19 @@ public class SQLQueries {
 
     }
 
+    public String getUsername(int id) throws SQLException {
+        String sql = "Select username from users where user_id=?";
+        PreparedStatement pst = con.prepareStatement(sql);
+        pst.setInt(1, id);
+        ResultSet rs = pst.executeQuery();
+        String user = "";
+        if (rs.next()) {
+            user = rs.getString(1);
+        }
+        return user;
+
+    }
+
     public double checkBalance(int id) throws SQLException {
         String sql = "select amount from balance where user_id=?";
         PreparedStatement pst = con.prepareStatement(sql);
@@ -146,6 +182,11 @@ public class SQLQueries {
     public void payAmount(String user, double amount, int id) throws SQLException {
         String sql = "select amount from balance where user_id=?";
         int payee_id = getUserID(user);
+        String payer = getUsername(id);
+        if (payer.equals(user)) {
+            System.out.println("You cant transfer money to your self!!");
+            return;
+        }
         if (payee_id == -1) {
             System.out.println("Username does not exist!!");
             return;
@@ -179,12 +220,27 @@ public class SQLQueries {
             pst.execute();
             System.out.println("Payment successfull!!!!");
 
-            String hist = "INSERT INTO payment_history(to_id, from_id, amount) VALUES(?,?,?)";
+            String hist = "INSERT INTO payment_history(to_, from_, amount) VALUES(?,?,?)";
             pst = con.prepareStatement(hist);
-            pst.setInt(1, payee_id);
-            pst.setInt(2, id);
+            pst.setString(1, user);
+
+            pst.setString(2, payer);
             pst.setDouble(3, amount);
             pst.execute();
         }
+    }
+
+    public ResultSet getTransactions(String username) throws SQLException {
+        String sql = "select * from payment_history where to_=? or from_=?";
+        PreparedStatement pst = con.prepareStatement(sql);
+        pst.setString(1, username);
+        pst.setString(2, username);
+        return pst.executeQuery();
+    }
+
+    public ResultSet getUsers(int id) throws SQLException {
+        String sql = "select user_id, username from users";
+        PreparedStatement pst = con.prepareStatement(sql);
+        return pst.executeQuery();
     }
 }

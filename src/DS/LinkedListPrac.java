@@ -1,16 +1,16 @@
 package DS;
 
-class List<T> {
-    class Node {
-        T val;
-        Node next;
+public class LinkedListPrac<T> {
+    public class Node {
+        public T val;
+        public Node next;
 
         public Node(T val) {
             this.val = val;
         }
     }
 
-    Node head = null;
+    public Node head = null;
 
     public void addFirst(T x) {
         Node n1 = new Node(x);
@@ -20,6 +20,15 @@ class List<T> {
             n1.next = head;
             head = n1;
         }
+    }
+
+    public void viewAll() {
+    }
+
+    public void viewSent(String user) {
+    }
+
+    public void viewReciv(String user) {
     }
 
     public void display() {
@@ -166,10 +175,4 @@ class List<T> {
         System.out.println();
     }
 
-}
-
-public class LinkedListPrac {
-    public static void main(String[] args) {
-        
-    }
 }
