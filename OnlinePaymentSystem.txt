@@ -23,6 +23,7 @@ paytm messages on payments
     -- search by type
     -- search by min amount
     -- search by date
+    -- search by user
 5) Change settings
     -- change username
     -- add buisness type

@@ -41,12 +41,12 @@ public class LoginPage {
                     if (id != 0) {
                         Misc.cls();
                         currentUserID = id;
-                        System.out.println("Login Successfull!!");
+                        System.out.println(Misc.ANSI_GREEN+"Login Successfull!!"+Misc.ANSI_RESET);
                         Home h = new Home(id, sc);
                         h.main();
                     } else {
                         Misc.cls();
-                        System.out.println("Wrong username or password!!");
+                        System.out.println(Misc.ANSI_RED+"Wrong username or password!!"+Misc.ANSI_RESET);
                     }
                     ind = 0;
                     break;

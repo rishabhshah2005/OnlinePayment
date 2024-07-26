@@ -133,6 +133,9 @@ public class Transactions {
                     viewRecived();
                     index = 0;
                     break;
+                case 4:
+                    Misc.cls();
+                    break;
 
                 default:
                     System.out.println("Enter correct index");

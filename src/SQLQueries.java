@@ -1,5 +1,4 @@
 import java.sql.*;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class SQLQueries {
@@ -179,6 +178,17 @@ public class SQLQueries {
         return rs.getDouble(1);
     }
 
+    public boolean checkPin(int id, String pin) throws SQLException {
+        boolean found = false;
+        String sql = "select * from users where user_id=? and pin=?";
+        PreparedStatement pst = con.prepareStatement(sql);
+        pst.setInt(1, id);
+        pst.setString(2, pin);
+        ResultSet rs = pst.executeQuery();
+        found = rs.next();
+        return found;
+    }
+
     public void payAmount(String user, double amount, int id) throws SQLException {
         String sql = "select amount from balance where user_id=?";
         int payee_id = getUserID(user);
@@ -202,7 +212,7 @@ public class SQLQueries {
         rs.next();
         double curr_balance = rs.getDouble(1);
         if (curr_balance < amount) {
-            System.out.println("Insufficient Balance($" + curr_balance + ")!!!");
+            System.out.println(Misc.ANSI_RED + "Insufficient Balance($" + curr_balance + ")!!!" + Misc.ANSI_RESET);
             return;
         } else {
             double new_bal = curr_balance - amount;
@@ -218,7 +228,7 @@ public class SQLQueries {
             pst.setDouble(1, amount);
             pst.setInt(2, payee_id);
             pst.execute();
-            System.out.println("Payment successfull!!!!");
+            System.out.println(Misc.ANSI_GREEN + "Payment successfull!!!!" + Misc.ANSI_RESET);
 
             String hist = "INSERT INTO payment_history(to_, from_, amount) VALUES(?,?,?)";
             pst = con.prepareStatement(hist);

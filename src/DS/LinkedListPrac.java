@@ -1,5 +1,7 @@
 package DS;
 
+import java.sql.Timestamp;
+
 public class LinkedListPrac<T> {
     public class Node {
         public T val;
@@ -29,6 +31,30 @@ public class LinkedListPrac<T> {
     }
 
     public void viewReciv(String user) {
+    }
+
+    public void searchByType(String type) {
+    }
+
+    public void searchToUser(String user) {
+    }
+
+    public void searchMaxAmnt(double x) {
+    }
+
+    public void searchMinAmnt(double x) {
+    }
+
+    public void searchXAmnt(double x) {
+    }
+
+    public void showBefore(Timestamp t) {
+    }
+
+    public void showAfter(Timestamp t) {
+    }
+
+    public void showOn(Timestamp t) {
     }
 
     public void display() {

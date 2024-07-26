@@ -1,4 +1,5 @@
 import java.sql.SQLException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 class Home {
@@ -47,21 +48,47 @@ class Home {
                     tr.main(inp);
                     index = 0;
                     break;
+                case 4:
+                    SearchPayments sp = new SearchPayments(id);
+                    sp.main(inp);
+                    index = 0;
+                    break;
                 case 6:
                     quer.con.close();
                     break;
                 default:
                     break;
             }
-            
+
         }
     }
 
     void pay() throws SQLException {
         System.out.print("Enter username of whom you want to pay: ");
         String payee = inp.nextLine();
-        System.out.print("Enter amount: ");
-        double amount = inp.nextDouble();
+        double amount = 0;
+
+        String pin = "";
+        for (int i = 0; i < 5; i++) {
+            System.out.print("Enter your pin(" + (5 - i) + " tries left): ");
+            pin = inp.nextLine();
+
+            if (quer.checkPin(id, pin)) {
+                break;
+            }
+            System.out.println(Misc.ANSI_RED + "Wrong PIN!!" + Misc.ANSI_RESET);
+            if (i == 4) {
+                System.out.println(Misc.ANSI_RED + "You are out of tries!!" + Misc.ANSI_RESET);
+                return;
+            }
+        }
+        try {
+            System.out.print("Enter amount: ");
+            amount = inp.nextDouble();
+        } catch (InputMismatchException e) {
+            System.out.println("Intput type not supported!!");
+            pay();
+        }
         quer.payAmount(payee, amount, id);
     }
 
