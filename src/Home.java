@@ -53,7 +53,20 @@ class Home {
                     sp.main(inp);
                     index = 0;
                     break;
+                case 5:
+                    SettingsPage stp = new SettingsPage(id);
+                    try {
+                        stp.main(inp);
+                    } catch (UserDeleted e) {
+                        index = 6;
+                        Misc.cls();
+                        System.out.println(Misc.ANSI_RED + "USER DELETED!!" + Misc.ANSI_RESET);
+                        break;
+                    }
+                    index = 0;
+                    break;
                 case 6:
+                    Misc.cls();
                     quer.con.close();
                     break;
                 default:

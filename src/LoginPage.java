@@ -9,6 +9,7 @@ import java.sql.*;
 public class LoginPage {
     public static void main(String[] args)
             throws IOException, InterruptedException, SQLException, ClassNotFoundException {
+        Misc.cls();
         Misc.welcome();
 
         Scanner sc = new Scanner(System.in);
@@ -41,12 +42,12 @@ public class LoginPage {
                     if (id != 0) {
                         Misc.cls();
                         currentUserID = id;
-                        System.out.println(Misc.ANSI_GREEN+"Login Successfull!!"+Misc.ANSI_RESET);
+                        System.out.println(Misc.ANSI_GREEN + "Login Successfull!!" + Misc.ANSI_RESET);
                         Home h = new Home(id, sc);
                         h.main();
                     } else {
                         Misc.cls();
-                        System.out.println(Misc.ANSI_RED+"Wrong username or password!!"+Misc.ANSI_RESET);
+                        System.out.println(Misc.ANSI_RED + "Wrong username or password!!" + Misc.ANSI_RESET);
                     }
                     ind = 0;
                     break;

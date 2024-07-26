@@ -27,6 +27,40 @@ public class SQLQueries {
         }
     }
 
+    public void updateUser(String newVal, String oldVal) throws SQLException {
+        String sql = "update users set username=? where username=?";
+        PreparedStatement pst = con.prepareStatement(sql);
+
+        pst.setString(1, newVal);
+        pst.setString(2, oldVal);
+        pst.executeUpdate();
+    }
+
+    public void updatePass(String newVal, String oldVal) throws SQLException {
+        String sql = "update users set password=? where username=?";
+        PreparedStatement pst = con.prepareStatement(sql);
+
+        pst.setString(1, newVal);
+        pst.setString(2, oldVal);
+        pst.executeUpdate();
+    }
+
+    public void updateType(int id, String type) throws SQLException {
+        String sql = "update users set buisness_type=? where user_id=?";
+        PreparedStatement pst = con.prepareStatement(sql);
+
+        pst.setString(1, type);
+        pst.setInt(2, id);
+        pst.executeUpdate();
+    }
+
+    void deleteUser(int id) throws SQLException {
+        String sql = "delete from users where user_id=?";
+        PreparedStatement pst = con.prepareStatement(sql);
+        pst.setInt(1, id);
+        pst.executeUpdate();
+    }
+
     private int getBranchID(Scanner inp) throws SQLException {
         String sql = "select * from banks";
         PreparedStatement pst = con.prepareStatement(sql);
@@ -78,6 +112,15 @@ public class SQLQueries {
         return age;
     }
 
+    public boolean checkUsername(String user) throws SQLException {
+        String sql = "select * from users where username=?";
+        PreparedStatement pst = con.prepareStatement(sql);
+        pst.setString(1, user);
+        ResultSet rs = pst.executeQuery();
+        boolean found = rs.next();
+        return found;
+    }
+
     void insertNewUser(Scanner inp) throws SQLException {
         // TODO: check limits for all fields
         System.out.print("Enter firstname: ");
@@ -110,6 +153,14 @@ public class SQLQueries {
         inp.nextLine();
         System.out.print("Create username: ");
         String username = inp.nextLine();
+        boolean found = checkUsername(username);
+        while (found) {
+            System.out.println(
+                    Misc.ANSI_RED + "Username already exists. Please enter another username!!" + Misc.ANSI_RESET);
+            System.out.print("Create username: ");
+            username = inp.nextLine();
+            found = checkUsername(username);
+        }
 
         System.out.print("Create Password: ");
         String password = inp.nextLine();

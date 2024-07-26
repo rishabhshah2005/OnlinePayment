@@ -26,8 +26,8 @@ paytm messages on payments
     -- search by user
 5) Change settings
     -- change username
-    -- add buisness type
-    -- switch banks
+    -- change password
+    -- change buisness type
     -- delete account
 6) sign out
 
