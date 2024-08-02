@@ -15,7 +15,7 @@ public class LoginPage {
         Scanner sc = new Scanner(System.in);
         SQLQueries quer = new SQLQueries();
         Console cons = System.console();
-        int currentUserID = -1;
+
 
         int ind = 0;
         while (ind != 3) {
@@ -41,7 +41,7 @@ public class LoginPage {
                     int id = quer.checkUsernamePass(user, pass);
                     if (id != 0) {
                         Misc.cls();
-                        currentUserID = id;
+
                         System.out.println(Misc.ANSI_GREEN + "Login Successfull!!" + Misc.ANSI_RESET);
                         Home h = new Home(id, sc);
                         h.main();

@@ -3,7 +3,6 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-import java.lang.*;
 
 import DS.LinkedListPrac;
 
