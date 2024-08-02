@@ -18,7 +18,8 @@ public class SearchPayments {
 
             Node temp = head;
             if (head == null) {
-                System.out.print("list is empty");
+                System.out.println("No transactions have been made");
+                return;
             }
             String[] heading = { "To", "From", "Amount", "Type", "Time" };
             System.out.println(Misc.padAllRight(heading, 25, "\u001B[33m"));
@@ -36,12 +37,13 @@ public class SearchPayments {
         public void searchToUser(String user) {
             Node temp = head;
             if (head == null) {
-                System.out.print("list is empty");
+                System.out.println("No transactions have been made");
+                return;
             }
             String[] heading = { "To", "From", "Amount", "Type", "Time" };
             System.out.println(Misc.padAllRight(heading, 25, "\u001B[33m"));
             while (temp != null) {
-                if (temp.val.to_.equals(user)) {
+                if (temp.val.to_.equals(user) || temp.val.from_.equals(user)) {
                     String[] line = { temp.val.to_, temp.val.from_, "$" + temp.val.getAmount(), temp.val.getType(),
                             "" + temp.val.getTime() };
                     System.out.println(Misc.padAllRight(line, 25));
@@ -54,7 +56,8 @@ public class SearchPayments {
         public void searchMaxAmnt(double x) {
             Node temp = head;
             if (head == null) {
-                System.out.print("list is empty");
+                System.out.println("No transactions have been made");
+                return;
             }
             String[] heading = { "To", "From", "Amount", "Type", "Time" };
             System.out.println(Misc.padAllRight(heading, 25, "\u001B[33m"));
@@ -72,7 +75,8 @@ public class SearchPayments {
         public void searchMinAmnt(double x) {
             Node temp = head;
             if (head == null) {
-                System.out.print("list is empty");
+                System.out.println("No transactions have been made");
+                return;
             }
             String[] heading = { "To", "From", "Amount", "Type", "Time" };
             System.out.println(Misc.padAllRight(heading, 25, "\u001B[33m"));
@@ -90,7 +94,8 @@ public class SearchPayments {
         public void searchXAmnt(double x) {
             Node temp = head;
             if (head == null) {
-                System.out.print("list is empty");
+                System.out.println("No transactions have been made");
+                return;
             }
             String[] heading = { "To", "From", "Amount", "Type", "Time" };
             System.out.println(Misc.padAllRight(heading, 25, "\u001B[33m"));
@@ -108,7 +113,8 @@ public class SearchPayments {
         public void showBefore(Timestamp t) {
             Node temp = head;
             if (head == null) {
-                System.out.print("list is empty");
+                System.out.println("No transactions have been made");
+                return;
             }
             String[] heading = { "To", "From", "Amount", "Type", "Time" };
             System.out.println(Misc.padAllRight(heading, 25, "\u001B[33m"));
@@ -126,7 +132,8 @@ public class SearchPayments {
         public void showAfter(Timestamp t) {
             Node temp = head;
             if (head == null) {
-                System.out.print("list is empty");
+                System.out.println("No transactions have been made");
+                return;
             }
             String[] heading = { "To", "From", "Amount", "Type", "Time" };
             System.out.println(Misc.padAllRight(heading, 25, "\u001B[33m"));
@@ -144,7 +151,8 @@ public class SearchPayments {
         public void showOn(Timestamp t) {
             Node temp = head;
             if (head == null) {
-                System.out.print("list is empty");
+                System.out.println("No transactions have been made");
+                return;
             }
             String[] heading = { "To", "From", "Amount", "Type", "Time" };
             System.out.println(Misc.padAllRight(heading, 25, "\u001B[33m"));
@@ -271,7 +279,7 @@ public class SearchPayments {
     }
 
     void main(Scanner inp) {
-
+        Misc.cls();
         int index = 0;
         while (index != 5) {
             printMenu();

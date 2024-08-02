@@ -1,5 +1,9 @@
+import java.io.BufferedReader;
 import java.io.Console;
 import java.io.IOException;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.sql.*;
@@ -15,7 +19,24 @@ public class LoginPage {
         Scanner sc = new Scanner(System.in);
         SQLQueries quer = new SQLQueries();
         Console cons = System.console();
-
+        File f = new File("login.txt");
+        if (f.exists()) {
+            FileReader fr = new FileReader(f);
+            BufferedReader br = new BufferedReader(fr);
+            String user = "";
+            String pass = "";
+            user = br.readLine();
+            pass = br.readLine();
+            br.close();
+            fr.close();
+            if (user != null && pass != null) {
+                int id = quer.checkUsernamePass(user, pass);
+                if (id != 0) {
+                    Home h = new Home(id, sc);
+                    h.main();
+                }
+            }
+        }
 
         int ind = 0;
         while (ind != 3) {
@@ -41,6 +62,20 @@ public class LoginPage {
                     int id = quer.checkUsernamePass(user, pass);
                     if (id != 0) {
                         Misc.cls();
+                        System.out.print("Do you want to stay signed in?? (y/n): ");
+                        String ans = sc.nextLine();
+                        while (!(ans.equals("y") || ans.equals("n"))) {
+                            System.out.println("Enter correct option!!");
+                            System.out.print("Do you want to stay signed in?? (y/n): ");
+                            ans = sc.nextLine();
+                        }
+                        if (ans.equals("y")) {
+                            // File f = new File("login.txt");
+                            FileWriter fw = new FileWriter(f);
+                            fw.write(user + "\n");
+                            fw.write(pass);
+                            fw.close();
+                        }
 
                         System.out.println(Misc.ANSI_GREEN + "Login Successfull!!" + Misc.ANSI_RESET);
                         Home h = new Home(id, sc);

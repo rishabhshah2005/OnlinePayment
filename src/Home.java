@@ -1,3 +1,5 @@
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -19,12 +21,13 @@ class Home {
         System.out.println("3) View transaction history");
         System.out.println("4) Search through payments");
         System.out.println("5) Change settings");
-        System.out.println("6) Sign Out");
+        System.out.println("6) Exit");
+        System.out.println("7) Sign Out");
     }
 
-    void main() throws SQLException, ClassNotFoundException {
+    void main() throws SQLException, ClassNotFoundException, IOException {
         int index = 0;
-        while (index != 6) {
+        while (index != 7) {
             printMenu();
             try {
                 System.out.print("Enter index: ");
@@ -68,6 +71,13 @@ class Home {
                 case 6:
                     Misc.cls();
                     quer.con.close();
+                    System.exit(0);
+                    break;
+                case 7:
+                    Misc.cls();
+                    quer.con.close();
+                    File f = new File("login.txt");
+                    f.delete();
                     break;
                 default:
                     break;
@@ -107,6 +117,7 @@ class Home {
 
     void checkBalance() throws SQLException {
         Double bal = quer.checkBalance(id);
+        Misc.cls();
         System.out.println("Your balance is : $" + bal);
     }
 }

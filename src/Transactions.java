@@ -14,7 +14,8 @@ public class Transactions {
         public void viewAll() {
             Node temp = head;
             if (head == null) {
-                System.out.print("list is empty");
+                System.out.println("No transactions have been made");
+                return;
             }
             String[] heading = { "To", "From", "Amount", "Type", "Time" };
             System.out.println(Misc.padAllRight(heading, 25, "\u001B[33m"));
@@ -30,7 +31,8 @@ public class Transactions {
         public void viewReciv(String user) {
             Node temp = head;
             if (head == null) {
-                System.out.print("list is empty");
+                System.out.println("No transactions have been made");
+                return;
             }
             String[] heading = { "To", "From", "Amount", "Type", "Time" };
             System.out.println(Misc.padAllRight(heading, 25, "\u001B[33m"));
@@ -48,7 +50,8 @@ public class Transactions {
         public void viewSent(String user) {
             Node temp = head;
             if (head == null) {
-                System.out.print("list is empty");
+                System.out.println("No transactions have been made");
+                return;
             }
             String[] heading = { "To", "From", "Amount", "Type", "Time" };
             System.out.println(Misc.padAllRight(heading, 25, "\u001B[33m"));
