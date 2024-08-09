@@ -29,12 +29,7 @@ class Home {
         int index = 0;
         while (index != 7) {
             printMenu();
-            try {
-                System.out.print("Enter index: ");
-                index = inp.nextInt();
-            } catch (Exception e) {
-                System.out.println("Input type not supported!!");
-            }
+            index = Misc.checkInt(inp, "Enter index: ");
             inp.nextLine();
             switch (index) {
                 case 1:

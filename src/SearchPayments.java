@@ -283,13 +283,8 @@ public class SearchPayments {
         int index = 0;
         while (index != 5) {
             printMenu();
-            try {
-                System.out.print("Enter index: ");
-                // inp.nextLine();
-                index = inp.nextInt();
-            } catch (InputMismatchException e) {
-                System.out.println("Input not supported");
-            }
+            
+            index = Misc.checkInt(inp, "Enter index: ");
             switch (index) {
                 case 1:
                     Misc.cls();

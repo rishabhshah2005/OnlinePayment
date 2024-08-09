@@ -44,12 +44,8 @@ public class LoginPage {
             System.out.println("2) SignUp");
             System.out.println("3) Exit");
 
-            System.out.print("Enter your choice: ");
-            try {
-                ind = sc.nextInt();
-            } catch (InputMismatchException e) {
-                System.out.println("Input type not supported!!");
-            }
+            ind = Misc.checkInt(sc, "Enter your choice: ");
+
             switch (ind) {
                 case 1:
                     System.out.print("Enter username: ");

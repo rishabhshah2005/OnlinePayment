@@ -2,8 +2,10 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Scanner;
 
-class UserDeleted extends Exception{}
+class UserDeleted extends Exception {
+}
 
 class Misc {
     public static final String ANSI_RESET = "\u001B[0m";
@@ -56,7 +58,7 @@ class Misc {
         return color + res + "\u001B[0m";
     }
 
-    public static Timestamp convert(String date) throws ParseException{
+    public static Timestamp convert(String date) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 
         Date parsedDate = sdf.parse(date);
@@ -72,6 +74,19 @@ class Misc {
                 "   \\ \\/  \\/ /   |  __|   | |      | |      | |  | | | |\\/| | |  __|  \r\n" + //
                 "    \\  /\\  /    | |____  | |____  | |____  | |__| | | |  | | | |____ \r\n" + //
                 "     \\/  \\/     |______| |______|  \\_____|  \\____/  |_|  |_| |______|" + ANSI_RESET);
+    }
+
+    public static int checkInt(Scanner inp, String s) {
+        int n = 0;
+        try {
+            System.out.print(s);
+            n = inp.nextInt();
+        } catch (Exception e) {
+            System.out.println("Input Type not supported");
+            inp.nextLine();
+            return checkInt(inp, s);
+        }
+        return n;
     }
 }
 
