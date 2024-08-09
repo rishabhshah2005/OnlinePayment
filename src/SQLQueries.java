@@ -1,4 +1,5 @@
 import java.sql.*;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class SQLQueries {
@@ -94,7 +95,7 @@ public class SQLQueries {
             System.out.print("Enter age: ");
             inp.nextLine();
             age = inp.nextInt();
-        } catch (Exception e) {
+        } catch (InputMismatchException e) {
             System.out.println("Input not supported!!");
             return takeAge(inp);
         }
@@ -102,12 +103,22 @@ public class SQLQueries {
             if (age < 0) {
                 System.out.println("Negative age is not allowed");
                 System.out.print("Enter age: ");
-                age = inp.nextInt();
+                try {
+                    age = inp.nextInt();
+                } catch (Exception e) {
+                    System.out.println("Input not supported!!");
+                    return takeAge(inp);
+                }
                 continue;
             }
             System.out.println("You must be at least 18 to open a account!!");
             System.out.print("Enter age: ");
-            age = inp.nextInt();
+            try {
+                age = inp.nextInt();
+            } catch (Exception e) {
+                System.out.println("Input not supported!!");
+                return takeAge(inp);
+            }
         }
         return age;
     }
