@@ -263,9 +263,14 @@ public class SQLQueries {
             System.out.println("Username does not exist!!");
             return;
         }
-        if (amount < 0) {
-            System.out.println("Amount cant be negative!! Nice try :)");
-            return;
+        if (amount <= 0) {
+            if (amount==0) {
+                System.out.println("You cant transfer $0");
+                return;
+            } else {
+                System.out.println("Amount cant be negative!! Nice try :)");
+                return;
+            }
         }
 
         PreparedStatement pst = con.prepareStatement(sql);
