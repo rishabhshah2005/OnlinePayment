@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 07, 2024 at 07:52 PM
+-- Generation Time: Aug 15, 2024 at 11:50 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -272,7 +272,35 @@ INSERT INTO `payment_history` (`ref_no`, `to_`, `from_`, `amount`, `time`, `type
 (176, 'pizzahut', 'mayank', 1599, '2024-07-23 18:30:00', 'food'),
 (177, 'medhut', 'mayank', 1497, '2024-07-06 18:30:00', 'medicine'),
 (178, 'dominos', 'mayank', 2905, '2024-07-13 18:30:00', 'food'),
-(179, 'cinepolis', 'mayank', 208, '2024-07-03 18:30:00', 'entertainment');
+(179, 'cinepolis', 'mayank', 208, '2024-07-03 18:30:00', 'entertainment'),
+(180, 'gamezone', 'rishabhshah2005', 570, '2024-08-03 18:30:00', 'entertainment'),
+(181, 'gamezone', 'rishabhshah2005', 410, '2024-08-11 18:30:00', 'entertainment'),
+(182, 'gamezone', 'rishabhshah2005', 2840, '2024-07-31 18:30:00', 'entertainment'),
+(183, 'gamezone', 'rishabhshah2005', 2937, '2024-08-21 18:30:00', 'entertainment'),
+(184, 'gamezone', 'avipatel', 1865, '2024-07-31 18:30:00', 'entertainment'),
+(185, 'gamezone', 'avipatel', 1461, '2024-08-19 18:30:00', 'entertainment'),
+(186, 'gamezone', 'avipatel', 2019, '2024-08-01 18:30:00', 'entertainment'),
+(187, 'gamezone', 'avipatel', 1290, '2024-08-25 18:30:00', 'entertainment'),
+(188, 'gamezone', 'rutvivora', 2357, '2024-08-14 18:30:00', 'entertainment'),
+(189, 'gamezone', 'rutvivora', 920, '2024-08-20 18:30:00', 'entertainment'),
+(190, 'gamezone', 'rutvivora', 656, '2024-08-13 18:30:00', 'entertainment'),
+(191, 'gamezone', 'rutvivora', 1702, '2024-08-01 18:30:00', 'entertainment'),
+(192, 'gamezone', 'kashakjain', 977, '2024-08-25 18:30:00', 'entertainment'),
+(193, 'gamezone', 'kashakjain', 663, '2024-08-26 18:30:00', 'entertainment'),
+(194, 'gamezone', 'kashakjain', 2888, '2024-08-11 18:30:00', 'entertainment'),
+(195, 'gamezone', 'kashakjain', 261, '2024-08-02 18:30:00', 'entertainment'),
+(196, 'gamezone', 'saransh', 1935, '2024-08-26 18:30:00', 'entertainment'),
+(197, 'gamezone', 'saransh', 227, '2024-08-28 18:30:00', 'entertainment'),
+(198, 'gamezone', 'saransh', 1121, '2024-08-23 18:30:00', 'entertainment'),
+(199, 'gamezone', 'saransh', 556, '2024-08-23 18:30:00', 'entertainment'),
+(200, 'gamezone', 'ankit', 450, '2024-08-24 18:30:00', 'entertainment'),
+(201, 'gamezone', 'ankit', 2522, '2024-08-07 18:30:00', 'entertainment'),
+(202, 'gamezone', 'ankit', 883, '2024-08-18 18:30:00', 'entertainment'),
+(203, 'gamezone', 'ankit', 1654, '2024-08-15 18:30:00', 'entertainment'),
+(204, 'gamezone', 'mayank', 920, '2024-08-09 18:30:00', 'entertainment'),
+(205, 'gamezone', 'mayank', 749, '2024-08-24 18:30:00', 'entertainment'),
+(206, 'gamezone', 'mayank', 2611, '2024-08-10 18:30:00', 'entertainment'),
+(207, 'gamezone', 'mayank', 2199, '2024-08-13 18:30:00', 'entertainment');
 
 --
 -- Triggers `payment_history`
@@ -393,7 +421,7 @@ ALTER TABLE `banks`
 -- AUTO_INCREMENT for table `payment_history`
 --
 ALTER TABLE `payment_history`
-  MODIFY `ref_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=180;
+  MODIFY `ref_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=208;
 
 --
 -- AUTO_INCREMENT for table `users`
