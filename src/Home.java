@@ -56,9 +56,13 @@ class Home {
                     try {
                         stp.main(inp);
                     } catch (UserDeleted e) {
-                        index = 6;
+                        index = 7;
                         Misc.cls();
                         System.out.println(Misc.ANSI_RED + "USER DELETED!!" + Misc.ANSI_RESET);
+                        File f = new File("login.txt");
+                        if (f.exists()) {
+                            f.delete();
+                        }
                         break;
                     }
                     index = 0;
@@ -72,7 +76,9 @@ class Home {
                     Misc.cls();
                     quer.con.close();
                     File f = new File("login.txt");
-                    f.delete();
+                    if (f.exists()) {
+                        f.delete();
+                    }
                     break;
                 default:
                     break;

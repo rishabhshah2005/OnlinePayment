@@ -152,6 +152,22 @@ public class SQLQueries {
 
         System.out.print("Enter mobile number: ");
         String mobile = inp.nextLine();
+        boolean hasAlphs = true;
+        while (hasAlphs) {
+            char[] marr = mobile.toCharArray();
+            for (char c : marr) {
+                if (!Character.isDigit(c)) {
+                    hasAlphs = true;
+                    System.out.println("Number should contain only numbers!!");
+                    System.out.print("Enter mobile number: ");
+                    mobile = inp.nextLine();
+                    break;
+                }
+                hasAlphs = false;
+            }
+
+        }
+
         while (mobile.length() != 10) {
             System.out.println("Mobile number has to be of 10 digits");
             System.out.print("Enter mobile number: ");
@@ -264,7 +280,7 @@ public class SQLQueries {
             return;
         }
         if (amount <= 0) {
-            if (amount==0) {
+            if (amount == 0) {
                 System.out.println("You cant transfer $0");
                 return;
             } else {
