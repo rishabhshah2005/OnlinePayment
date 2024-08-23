@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 15, 2024 at 11:50 AM
+-- Generation Time: Aug 23, 2024 at 08:05 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -38,14 +38,14 @@ CREATE TABLE `balance` (
 --
 
 INSERT INTO `balance` (`user_id`, `bank_id`, `amount`) VALUES
-(1, 1, 94260),
+(1, 1, 94160),
 (5, 2, 850),
 (6, 1, 1290),
-(7, 2, 1590),
+(7, 2, 1790),
 (8, 2, 1390),
 (9, 3, 1730),
 (10, 4, 2620),
-(11, 3, 12070),
+(11, 3, 12370),
 (12, 1, 15350),
 (13, 2, 1250),
 (17, 3, 200),
@@ -300,7 +300,12 @@ INSERT INTO `payment_history` (`ref_no`, `to_`, `from_`, `amount`, `time`, `type
 (204, 'gamezone', 'mayank', 920, '2024-08-09 18:30:00', 'entertainment'),
 (205, 'gamezone', 'mayank', 749, '2024-08-24 18:30:00', 'entertainment'),
 (206, 'gamezone', 'mayank', 2611, '2024-08-10 18:30:00', 'entertainment'),
-(207, 'gamezone', 'mayank', 2199, '2024-08-13 18:30:00', 'entertainment');
+(207, 'gamezone', 'mayank', 2199, '2024-08-13 18:30:00', 'entertainment'),
+(208, 'saransh', 'rishabhshah2005', 0, '2024-08-18 12:17:23', 'user'),
+(209, 'rishabhshah2005', 'abcd', 200, '2024-08-20 15:39:11', 'user'),
+(210, 'rishabhshah2005', 'rrrr', 200, '2024-08-21 06:32:17', 'user'),
+(211, 'saransh', 'rishabhshah2005', 200, '2024-08-21 06:51:01', 'user'),
+(212, 'rutvivora', 'rishabhshah2005', 300, '2024-08-23 18:03:16', 'user');
 
 --
 -- Triggers `payment_history`
@@ -309,7 +314,7 @@ DELIMITER $$
 CREATE TRIGGER `addType` BEFORE INSERT ON `payment_history` FOR EACH ROW BEGIN
 DECLARE
 typ varchar(15);
-set typ = (SELECT buisness_type from users where username=NEW.to_);
+set typ = (SELECT business_type from users where username=NEW.to_);
 set NEW.type = typ;
 END
 $$
@@ -331,14 +336,14 @@ CREATE TABLE `users` (
   `username` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
   `pin` varchar(10) NOT NULL,
-  `buisness_type` varchar(15) NOT NULL DEFAULT 'user'
+  `business_type` varchar(15) NOT NULL DEFAULT 'user'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `first_name`, `last_name`, `age`, `mobile`, `current_bank_id`, `username`, `password`, `pin`, `buisness_type`) VALUES
+INSERT INTO `users` (`user_id`, `first_name`, `last_name`, `age`, `mobile`, `current_bank_id`, `username`, `password`, `pin`, `business_type`) VALUES
 (1, 'Rishabh', 'Shah', 19, '8727145378', 1, 'rishabhshah2005', 'hello', '123456', 'user'),
 (5, 'Avi', 'Patel', 18, '1234567890', 2, 'avipatel', 'avipatel', '333666', 'user'),
 (6, 'Dominos', 'Pizza', 45, '8727415378', 1, 'dominos', 'hello', '123456', 'food'),
@@ -421,13 +426,13 @@ ALTER TABLE `banks`
 -- AUTO_INCREMENT for table `payment_history`
 --
 ALTER TABLE `payment_history`
-  MODIFY `ref_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=208;
+  MODIFY `ref_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=213;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

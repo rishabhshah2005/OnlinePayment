@@ -47,7 +47,7 @@ public class SQLQueries {
     }
 
     public void updateType(int id, String type) throws SQLException {
-        String sql = "update users set buisness_type=? where user_id=?";
+        String sql = "update users set business_type=? where user_id=?";
         PreparedStatement pst = con.prepareStatement(sql);
 
         pst.setString(1, type);
