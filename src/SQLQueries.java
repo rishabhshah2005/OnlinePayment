@@ -133,7 +133,6 @@ public class SQLQueries {
     }
 
     void insertNewUser(Scanner inp) throws SQLException {
-        // TODO: check limits for all fields
         System.out.print("Enter firstname: ");
         String first = inp.nextLine();
         while (first.length() > 20) {
@@ -158,7 +157,7 @@ public class SQLQueries {
             for (char c : marr) {
                 if (!Character.isDigit(c)) {
                     hasAlphs = true;
-                    System.out.println("Number should contain only numbers!!");
+                    System.out.println("Mobile number has to be of 10 digits and not contain alphabets");
                     System.out.print("Enter mobile number: ");
                     mobile = inp.nextLine();
                     break;
@@ -169,7 +168,7 @@ public class SQLQueries {
         }
 
         while (mobile.length() != 10) {
-            System.out.println("Mobile number has to be of 10 digits");
+            System.out.println("Mobile number has to be of 10 digits and not contain alphabets");
             System.out.print("Enter mobile number: ");
             mobile = inp.nextLine();
         }

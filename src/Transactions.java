@@ -110,23 +110,23 @@ public class Transactions {
     }
 
     void main(Scanner inp) {
-
+        Misc.cls();
         int index = 0;
         while (index != 4) {
             printMenu();
             index = Misc.checkInt(inp, "Enter index: ");
             switch (index) {
                 case 1:
+                    Misc.cls();
                     viewAll();
-                    index = 0;
                     break;
                 case 2:
+                    Misc.cls();
                     viewSent();
-                    index = 0;
                     break;
                 case 3:
+                    Misc.cls();
                     viewRecived();
-                    index = 0;
                     break;
                 case 4:
                     Misc.cls();
