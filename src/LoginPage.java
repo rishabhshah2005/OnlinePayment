@@ -57,6 +57,14 @@ public class LoginPage {
                     int id = quer.checkUsernamePass(user, pass);
                     if (id != 0) {
                         Misc.cls();
+                        boolean otp_check = Misc.generateOTP(sc);
+                        if (!otp_check) {
+                            Misc.cls();
+                            System.out.println(Misc.ANSI_RED + "Enter correct OTP" + Misc.ANSI_RESET);
+                            break;
+                        }
+                        Misc.cls();
+                        sc.nextLine();
                         System.out.print("Do you want to stay signed in?? (y/n): ");
                         String ans = sc.nextLine();
                         while (!(ans.equals("y") || ans.equals("n"))) {
@@ -71,7 +79,7 @@ public class LoginPage {
                             fw.write(pass);
                             fw.close();
                         }
-
+                        Misc.cls();
                         System.out.println(Misc.ANSI_GREEN + "Login Successfull!!" + Misc.ANSI_RESET);
                         Home h = new Home(id, sc);
                         h.main();

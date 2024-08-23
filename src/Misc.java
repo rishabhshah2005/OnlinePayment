@@ -2,12 +2,16 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
 import java.util.Scanner;
+import javax.swing.*;
+import java.awt.*;
 
 class UserDeleted extends Exception {
 }
 
 class Misc {
+    static Random r = new Random();
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_YELLOW = "\u001B[33m";
     public static final String ANSI_RED = "\u001B[31m\u001B[1m";
@@ -21,6 +25,32 @@ class Misc {
             System.out.println("Exception in cls()");
             System.out.println(e);
         }
+    }
+
+    public static boolean generateOTP(Scanner inp) {
+        JFrame f = new JFrame("OTP");
+        JLabel otp_lab;
+        int otp = r.nextInt(1000, 9999);
+        otp_lab = new JLabel("Your OTP is: " + otp, SwingConstants.CENTER);
+        otp_lab.setFont(new Font("Arial", Font.BOLD, 25));
+
+        f.setSize(300, 100);
+        f.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        f.add(otp_lab, BorderLayout.CENTER);
+
+        f.setLocationRelativeTo(null);
+        f.setAlwaysOnTop(true);
+        f.setVisible(true);
+        System.out.print("Enter otp: ");
+        int ans = inp.nextInt();
+        if (ans == otp) {
+            f.dispose();
+            return true;
+        } else {
+            f.dispose();
+            return false;
+        }
+
     }
 
     public static String leftPadding(String input, char ch, int L) {
@@ -68,12 +98,14 @@ class Misc {
     }
 
     public static void welcome() {
-        System.out.println(ANSI_GREEN + "__          __  ______   _         _____    ____    __  __   ______ \r\n" + //
-                " \\ \\        / / |  ____| | |       / ____|  / __ \\  |  \\/  | |  ____|\r\n" + //
-                "  \\ \\  /\\  / /  | |__    | |      | |      | |  | | | \\  / | | |__   \r\n" + //
-                "   \\ \\/  \\/ /   |  __|   | |      | |      | |  | | | |\\/| | |  __|  \r\n" + //
-                "    \\  /\\  /    | |____  | |____  | |____  | |__| | | |  | | | |____ \r\n" + //
-                "     \\/  \\/     |______| |______|  \\_____|  \\____/  |_|  |_| |______|" + ANSI_RESET);
+        System.out.println(ANSI_GREEN + "\r\n" + //
+                        "  _____           _          ___            \r\n" + //
+                        "  \\_   \\_ __  ___| |_ __ _  / _ \\__ _ _   _ \r\n" + //
+                        "   / /\\/ '_ \\/ __| __/ _` |/ /_)/ _` | | | |\r\n" + //
+                        "/\\/ /_ | | | \\__ \\ || (_| / ___/ (_| | |_| |\r\n" + //
+                        "\\____/ |_| |_|___/\\__\\__,_\\/    \\__,_|\\__, |\r\n" + //
+                        "                                      |___/ \r\n" + //
+                        "" + ANSI_RESET);
     }
 
     public static int checkInt(Scanner inp, String s) {
@@ -132,30 +164,6 @@ class Transaction {
     public String toString() {
         return "Transaction [amount=" + amount + ", type=" + type + ", from_=" + from_ + ", to_=" + to_ + ", time="
                 + time + "]";
-    }
-
-}
-
-class User {
-    int user_id;
-    String username;
-
-    public int getUser_id() {
-        return user_id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public User(int user_id, String username) {
-        this.user_id = user_id;
-        this.username = username;
-    }
-
-    @Override
-    public String toString() {
-        return "User [" + user_id + ":" + username + "]";
     }
 
 }

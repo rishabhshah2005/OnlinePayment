@@ -65,7 +65,7 @@ public class Transactions {
             System.out.println();
         }
     };
-    LinkedListPrac<User> user_arr = new LinkedListPrac<>();
+
     ResultSet rs;
 
     public Transactions(int id) throws ClassNotFoundException, SQLException {
