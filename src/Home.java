@@ -4,15 +4,15 @@ import java.sql.SQLException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-class Home {
+class Home implements Skeleton{
     Scanner inp;
     int id;
     SQLQueries quer;
 
-    Home(int id, Scanner sc) throws ClassNotFoundException, SQLException {
+    Home(int id, Scanner sc, SQLQueries x) throws ClassNotFoundException, SQLException {
         this.id = id;
         inp = sc;
-        quer = new SQLQueries();
+        quer = x;
     }
 
     public void printMenu() {
@@ -25,7 +25,7 @@ class Home {
         System.out.println("7) Sign Out");
     }
 
-    void main() throws SQLException, ClassNotFoundException, IOException {
+    void main() throws SQLException, IOException {
         int index = 0;
         while (index != 7) {
             printMenu();
@@ -42,17 +42,17 @@ class Home {
                     index = 0;
                     break;
                 case 3:
-                    Transactions tr = new Transactions(id);
+                    Transactions tr = new Transactions(id, quer);
                     tr.main(inp);
                     index = 0;
                     break;
                 case 4:
-                    SearchPayments sp = new SearchPayments(id);
+                    SearchPayments sp = new SearchPayments(id, quer);
                     sp.main(inp);
                     index = 0;
                     break;
                 case 5:
-                    SettingsPage stp = new SettingsPage(id);
+                    SettingsPage stp = new SettingsPage(id, quer);
                     try {
                         stp.main(inp);
                     } catch (UserDeleted e) {
@@ -74,7 +74,7 @@ class Home {
                     break;
                 case 7:
                     Misc.cls();
-                    quer.con.close();
+                    // quer.con.close();
                     File f = new File("login.txt");
                     if (f.exists()) {
                         f.delete();
@@ -121,4 +121,6 @@ class Home {
         Misc.cls();
         System.out.println("Your balance is : $" + bal);
     }
+
+    
 }

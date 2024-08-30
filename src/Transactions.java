@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 import DS.LinkedListPrac;
 
-public class Transactions {
+public class Transactions implements Skeleton {
     String user;
     SQLQueries quer;
     LinkedListPrac<Transaction> trans_arr = new LinkedListPrac<>() {
@@ -20,7 +20,7 @@ public class Transactions {
             System.out.println(Misc.padAllRight(heading, 25, "\u001B[33m"));
             while (temp != null) {
                 String[] line = { temp.val.to_, temp.val.from_, "$" + temp.val.getAmount(), temp.val.getType(),
-                        "" + temp.val.getTime() };
+                        Misc.formatTimestamp(temp.val.getTime()) };
                 System.out.println(Misc.padAllRight(line, 25));
                 temp = temp.next;
             }
@@ -38,7 +38,7 @@ public class Transactions {
             while (temp != null) {
                 if (temp.val.to_.equals(user)) {
                     String[] line = { temp.val.to_, temp.val.from_, "$" + temp.val.getAmount(), temp.val.getType(),
-                            "" + temp.val.getTime() };
+                            Misc.formatTimestamp(temp.val.getTime()) };
                     System.out.println(Misc.padAllRight(line, 25));
                 }
                 temp = temp.next;
@@ -57,7 +57,7 @@ public class Transactions {
             while (temp != null) {
                 if (temp.val.from_.equals(user)) {
                     String[] line = { temp.val.to_, temp.val.from_, "$" + temp.val.getAmount(), temp.val.getType(),
-                            "" + temp.val.getTime() };
+                            Misc.formatTimestamp(temp.val.getTime()) };
                     System.out.println(Misc.padAllRight(line, 25));
                 }
                 temp = temp.next;
@@ -68,8 +68,8 @@ public class Transactions {
 
     ResultSet rs;
 
-    public Transactions(int id) throws ClassNotFoundException, SQLException {
-        quer = new SQLQueries();
+    public Transactions(int id, SQLQueries x) throws SQLException {
+        quer = x;
         user = quer.getUsername(id);
         rs = quer.getTransactions(user);
         while (rs.next()) {
@@ -102,7 +102,7 @@ public class Transactions {
         trans_arr.display();
     }
 
-    void printMenu() {
+    public void printMenu() {
         System.out.println("1) View all transactions");
         System.out.println("2) View Sent transactions");
         System.out.println("3) View Recieved transactions");

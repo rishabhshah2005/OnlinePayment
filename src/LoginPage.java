@@ -31,7 +31,7 @@ public class LoginPage {
             if (user != null && pass != null) {
                 int id = quer.checkUsernamePass(user, pass);
                 if (id != 0) {
-                    Home h = new Home(id, sc);
+                    Home h = new Home(id, sc, quer);
                     h.main();
                 }
             }
@@ -81,7 +81,7 @@ public class LoginPage {
                         }
                         Misc.cls();
                         System.out.println(Misc.ANSI_GREEN + "Login Successfull!!" + Misc.ANSI_RESET);
-                        Home h = new Home(id, sc);
+                        Home h = new Home(id, sc, quer);
                         h.main();
                     } else {
                         Misc.cls();

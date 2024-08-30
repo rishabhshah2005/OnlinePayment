@@ -1,13 +1,14 @@
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.util.Scanner;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 
 import DS.LinkedListPrac;
 
-public class SearchPayments {
+public class SearchPayments implements Skeleton {
     String user;
     SQLQueries quer;
     ResultSet rs;
@@ -25,7 +26,7 @@ public class SearchPayments {
             while (temp != null) {
                 if (temp.val.type.equals(type)) {
                     String[] line = { temp.val.to_, temp.val.from_, "$" + temp.val.getAmount(), temp.val.getType(),
-                            "" + temp.val.getTime() };
+                            Misc.formatTimestamp(temp.val.getTime()) };
                     System.out.println(Misc.padAllRight(line, 25));
                 }
                 temp = temp.next;
@@ -44,7 +45,7 @@ public class SearchPayments {
             while (temp != null) {
                 if (temp.val.to_.equals(user) || temp.val.from_.equals(user)) {
                     String[] line = { temp.val.to_, temp.val.from_, "$" + temp.val.getAmount(), temp.val.getType(),
-                            "" + temp.val.getTime() };
+                    Misc.formatTimestamp(temp.val.getTime()) };
                     System.out.println(Misc.padAllRight(line, 25));
                 }
                 temp = temp.next;
@@ -63,7 +64,7 @@ public class SearchPayments {
             while (temp != null) {
                 if (temp.val.amount <= x) {
                     String[] line = { temp.val.to_, temp.val.from_, "$" + temp.val.getAmount(), temp.val.getType(),
-                            "" + temp.val.getTime() };
+                    Misc.formatTimestamp(temp.val.getTime()) };
                     System.out.println(Misc.padAllRight(line, 25));
                 }
                 temp = temp.next;
@@ -82,7 +83,7 @@ public class SearchPayments {
             while (temp != null) {
                 if (temp.val.amount >= x) {
                     String[] line = { temp.val.to_, temp.val.from_, "$" + temp.val.getAmount(), temp.val.getType(),
-                            "" + temp.val.getTime() };
+                    Misc.formatTimestamp(temp.val.getTime()) };
                     System.out.println(Misc.padAllRight(line, 25));
                 }
                 temp = temp.next;
@@ -101,7 +102,7 @@ public class SearchPayments {
             while (temp != null) {
                 if (temp.val.amount == x) {
                     String[] line = { temp.val.to_, temp.val.from_, "$" + temp.val.getAmount(), temp.val.getType(),
-                            "" + temp.val.getTime() };
+                    Misc.formatTimestamp(temp.val.getTime()) };
                     System.out.println(Misc.padAllRight(line, 25));
                 }
                 temp = temp.next;
@@ -120,7 +121,7 @@ public class SearchPayments {
             while (temp != null) {
                 if (temp.val.time.before(t)) {
                     String[] line = { temp.val.to_, temp.val.from_, "$" + temp.val.getAmount(), temp.val.getType(),
-                            "" + temp.val.getTime() };
+                    Misc.formatTimestamp(temp.val.getTime()) };
                     System.out.println(Misc.padAllRight(line, 25));
                 }
                 temp = temp.next;
@@ -139,7 +140,7 @@ public class SearchPayments {
             while (temp != null) {
                 if (temp.val.time.after(t)) {
                     String[] line = { temp.val.to_, temp.val.from_, "$" + temp.val.getAmount(), temp.val.getType(),
-                            "" + temp.val.getTime() };
+                    Misc.formatTimestamp(temp.val.getTime()) };
                     System.out.println(Misc.padAllRight(line, 25));
                 }
                 temp = temp.next;
@@ -161,7 +162,7 @@ public class SearchPayments {
 
                 if (d.getDayOfYear() == org.getDayOfYear() && d.getYear() == org.getYear()) {
                     String[] line = { temp.val.to_, temp.val.from_, "$" + temp.val.getAmount(), temp.val.getType(),
-                            "" + temp.val.getTime() };
+                    Misc.formatTimestamp(temp.val.getTime()) };
                     System.out.println(Misc.padAllRight(line, 25));
                 }
                 temp = temp.next;
@@ -176,8 +177,8 @@ public class SearchPayments {
      * -- search by date
      * -- search by user
      */
-    public SearchPayments(int id) throws ClassNotFoundException, SQLException {
-        quer = new SQLQueries();
+    public SearchPayments(int id, SQLQueries x) throws SQLException {
+        quer = x;
         user = quer.getUsername(id);
         rs = quer.getTransactions(user);
         while (rs.next()) {
@@ -192,7 +193,7 @@ public class SearchPayments {
     }
 
     void searchByDate(Scanner inp) {
-        Misc.cls();
+        // Misc.cls();
         System.out.println("1) Before X date");
         System.out.println("2) After X date");
         System.out.println("3) On X date");
@@ -205,9 +206,11 @@ public class SearchPayments {
                 inp.nextLine();
                 String dat = inp.nextLine();
                 try {
+                    Misc.cls();
                     trans_arr.showBefore(Misc.convert(dat));
-                } catch (Exception e) {
+                } catch (ParseException e) {
                     System.out.println("Enter date in correct format!!");
+                    break;
                 }
                 break;
             case 2:
@@ -215,9 +218,11 @@ public class SearchPayments {
                 inp.nextLine();
                 String dat1 = inp.nextLine();
                 try {
+                    Misc.cls();
                     trans_arr.showAfter(Misc.convert(dat1));
-                } catch (Exception e) {
+                } catch (ParseException e) {
                     System.out.println("Enter date in correct format!!");
+                    break;
                 }
                 break;
             case 3:
@@ -225,9 +230,11 @@ public class SearchPayments {
                 inp.nextLine();
                 String dat2 = inp.nextLine();
                 try {
+                    Misc.cls();
                     trans_arr.showOn(Misc.convert(dat2));
-                } catch (Exception e) {
+                } catch (ParseException e) {
                     System.out.println("Enter date in correct format!!");
+                    break;
                 }
                 break;
 
@@ -256,7 +263,7 @@ public class SearchPayments {
                 trans_arr.searchMinAmnt(y);
                 break;
             case 3:
-                System.out.print("Enter max amount: ");
+                System.out.print("Enter amount: ");
                 double z = inp.nextDouble();
                 trans_arr.searchXAmnt(z);
                 break;
@@ -269,7 +276,7 @@ public class SearchPayments {
         }
     }
 
-    void printMenu() {
+    public void printMenu() {
         System.out.println("1) Search by type");
         System.out.println("2) Search by amount");
         System.out.println("3) Search by date");
@@ -282,7 +289,7 @@ public class SearchPayments {
         int index = 0;
         while (index != 5) {
             printMenu();
-            
+
             index = Misc.checkInt(inp, "Enter index: ");
             switch (index) {
                 case 1:

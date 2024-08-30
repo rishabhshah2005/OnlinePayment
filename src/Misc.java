@@ -53,20 +53,19 @@ class Misc {
 
     }
 
+    static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm a");
+
+    public static String formatTimestamp(Timestamp t) {
+        return sdf.format(t).toUpperCase();
+    }
+
     public static String leftPadding(String input, char ch, int L) {
-
         String result = String.format("%" + L + "s", input).replace(' ', ch);
-
-        // Return the resultant string
         return result;
     }
 
-    // Function to perform right padding
     public static String rightPadding(String input, char ch, int L) {
-
         String result = String.format("%" + (-L) + "s", input).replace(' ', ch);
-
-        // Return the resultant string
         return result;
     }
 
@@ -99,13 +98,13 @@ class Misc {
 
     public static void welcome() {
         System.out.println(ANSI_GREEN + "\r\n" + //
-                        "  _____           _          ___            \r\n" + //
-                        "  \\_   \\_ __  ___| |_ __ _  / _ \\__ _ _   _ \r\n" + //
-                        "   / /\\/ '_ \\/ __| __/ _` |/ /_)/ _` | | | |\r\n" + //
-                        "/\\/ /_ | | | \\__ \\ || (_| / ___/ (_| | |_| |\r\n" + //
-                        "\\____/ |_| |_|___/\\__\\__,_\\/    \\__,_|\\__, |\r\n" + //
-                        "                                      |___/ \r\n" + //
-                        "" + ANSI_RESET);
+                "  _____           _          ___            \r\n" + //
+                "  \\_   \\_ __  ___| |_ __ _  / _ \\__ _ _   _ \r\n" + //
+                "   / /\\/ '_ \\/ __| __/ _` |/ /_)/ _` | | | |\r\n" + //
+                "/\\/ /_ | | | \\__ \\ || (_| / ___/ (_| | |_| |\r\n" + //
+                "\\____/ |_| |_|___/\\__\\__,_\\/    \\__,_|\\__, |\r\n" + //
+                "                                      |___/ \r\n" + //
+                "" + ANSI_RESET);
     }
 
     public static int checkInt(Scanner inp, String s) {

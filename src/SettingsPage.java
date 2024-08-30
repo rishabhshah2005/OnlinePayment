@@ -1,16 +1,16 @@
 import java.sql.SQLException;
 import java.util.Scanner;
 
-public class SettingsPage {
+public class SettingsPage  implements Skeleton{
     SQLQueries quer;
     int id;
 
-    public SettingsPage(int x) throws SQLException, ClassNotFoundException {
-        quer = new SQLQueries();
+    public SettingsPage(int x, SQLQueries q) throws SQLException {
+        quer = q;
         id = x;
     }
 
-    void printMenu() {
+    public void printMenu() {
         System.out.println("1) Change username");
         System.out.println("2) Change password");
         System.out.println("3) Change Buisness Type");
