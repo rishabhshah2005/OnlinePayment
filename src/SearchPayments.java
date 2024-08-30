@@ -45,7 +45,7 @@ public class SearchPayments implements Skeleton {
             while (temp != null) {
                 if (temp.val.to_.equals(user) || temp.val.from_.equals(user)) {
                     String[] line = { temp.val.to_, temp.val.from_, "$" + temp.val.getAmount(), temp.val.getType(),
-                    Misc.formatTimestamp(temp.val.getTime()) };
+                            Misc.formatTimestamp(temp.val.getTime()) };
                     System.out.println(Misc.padAllRight(line, 25));
                 }
                 temp = temp.next;
@@ -64,7 +64,7 @@ public class SearchPayments implements Skeleton {
             while (temp != null) {
                 if (temp.val.amount <= x) {
                     String[] line = { temp.val.to_, temp.val.from_, "$" + temp.val.getAmount(), temp.val.getType(),
-                    Misc.formatTimestamp(temp.val.getTime()) };
+                            Misc.formatTimestamp(temp.val.getTime()) };
                     System.out.println(Misc.padAllRight(line, 25));
                 }
                 temp = temp.next;
@@ -83,7 +83,7 @@ public class SearchPayments implements Skeleton {
             while (temp != null) {
                 if (temp.val.amount >= x) {
                     String[] line = { temp.val.to_, temp.val.from_, "$" + temp.val.getAmount(), temp.val.getType(),
-                    Misc.formatTimestamp(temp.val.getTime()) };
+                            Misc.formatTimestamp(temp.val.getTime()) };
                     System.out.println(Misc.padAllRight(line, 25));
                 }
                 temp = temp.next;
@@ -102,7 +102,7 @@ public class SearchPayments implements Skeleton {
             while (temp != null) {
                 if (temp.val.amount == x) {
                     String[] line = { temp.val.to_, temp.val.from_, "$" + temp.val.getAmount(), temp.val.getType(),
-                    Misc.formatTimestamp(temp.val.getTime()) };
+                            Misc.formatTimestamp(temp.val.getTime()) };
                     System.out.println(Misc.padAllRight(line, 25));
                 }
                 temp = temp.next;
@@ -121,7 +121,7 @@ public class SearchPayments implements Skeleton {
             while (temp != null) {
                 if (temp.val.time.before(t)) {
                     String[] line = { temp.val.to_, temp.val.from_, "$" + temp.val.getAmount(), temp.val.getType(),
-                    Misc.formatTimestamp(temp.val.getTime()) };
+                            Misc.formatTimestamp(temp.val.getTime()) };
                     System.out.println(Misc.padAllRight(line, 25));
                 }
                 temp = temp.next;
@@ -140,7 +140,7 @@ public class SearchPayments implements Skeleton {
             while (temp != null) {
                 if (temp.val.time.after(t)) {
                     String[] line = { temp.val.to_, temp.val.from_, "$" + temp.val.getAmount(), temp.val.getType(),
-                    Misc.formatTimestamp(temp.val.getTime()) };
+                            Misc.formatTimestamp(temp.val.getTime()) };
                     System.out.println(Misc.padAllRight(line, 25));
                 }
                 temp = temp.next;
@@ -162,7 +162,7 @@ public class SearchPayments implements Skeleton {
 
                 if (d.getDayOfYear() == org.getDayOfYear() && d.getYear() == org.getYear()) {
                     String[] line = { temp.val.to_, temp.val.from_, "$" + temp.val.getAmount(), temp.val.getType(),
-                    Misc.formatTimestamp(temp.val.getTime()) };
+                            Misc.formatTimestamp(temp.val.getTime()) };
                     System.out.println(Misc.padAllRight(line, 25));
                 }
                 temp = temp.next;
@@ -253,18 +253,15 @@ public class SearchPayments implements Skeleton {
         int index = inp.nextInt();
         switch (index) {
             case 1:
-                System.out.print("Enter max amount: ");
-                double x = inp.nextDouble();
+                double x = Misc.checkDouble(inp, "Enter max amount: ");
                 trans_arr.searchMaxAmnt(x);
                 break;
             case 2:
-                System.out.print("Enter min amount: ");
-                double y = inp.nextDouble();
+                double y = Misc.checkDouble(inp, "Enter min amount: ");
                 trans_arr.searchMinAmnt(y);
                 break;
             case 3:
-                System.out.print("Enter amount: ");
-                double z = inp.nextDouble();
+                double z = Misc.checkDouble(inp, "Enter amount: ");
                 trans_arr.searchXAmnt(z);
                 break;
             case 4:

@@ -7,8 +7,6 @@ import java.io.FileWriter;
 import java.util.Scanner;
 import java.sql.*;
 
-// TODO: make a feature to break from recursive loops
-
 public class LoginPage {
     public static void main(String[] args)
             throws IOException, InterruptedException, SQLException, ClassNotFoundException {

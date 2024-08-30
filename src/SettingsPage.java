@@ -1,7 +1,7 @@
 import java.sql.SQLException;
 import java.util.Scanner;
 
-public class SettingsPage  implements Skeleton{
+public class SettingsPage implements Skeleton {
     SQLQueries quer;
     int id;
 
@@ -27,6 +27,11 @@ public class SettingsPage  implements Skeleton{
         if (quer.checkUsernamePass(old_usr, pass) != 0) {
             System.out.print("Enter new username: ");
             String new_usr = inp.nextLine();
+            if (quer.checkUsername(new_usr)) {
+                Misc.cls();
+                System.out.println(Misc.ANSI_RED + "Username already exists!!!" + Misc.ANSI_RESET);
+                return;
+            }
             quer.updateUser(new_usr, old_usr);
             System.out.println(Misc.ANSI_GREEN + "Username updated!!" + Misc.ANSI_RESET);
 

@@ -119,6 +119,19 @@ class Misc {
         }
         return n;
     }
+
+    public static double checkDouble(Scanner inp, String s) {
+        double n = 0;
+        try {
+            System.out.print(s);
+            n = inp.nextDouble();
+        } catch (Exception e) {
+            System.out.println("Input Type not supported");
+            inp.nextLine();
+            return checkDouble(inp, s);
+        }
+        return n;
+    }
 }
 
 class Transaction {
